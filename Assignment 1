@@ -1,0 +1,62 @@
+# Base class
+class Smartphone:
+    # Constructor to initialize attributes
+    def __init__(self, brand, model, battery=100):
+        self.brand = brand
+        self.model = model
+        self.battery = battery
+        self.apps = []
+
+    # Method to install an app
+    def install_app(self, app_name):
+        self.apps.append(app_name)
+        print(f"{app_name} installed on {self.model}.")
+
+    # Method to make a call
+    def make_call(self, number):
+        if self.battery > 0:
+            print(f"Calling {number} from {self.model}...")
+            self.battery -= 5
+        else:
+            print("Battery too low to make a call!")
+
+    # Method to show battery level
+    def check_battery(self):
+        print(f"{self.model} battery: {self.battery}%")
+
+    # Polymorphism example: play_game (basic phone)
+    def play_game(self):
+        print(f"{self.model} can play simple games.")
+
+
+# Inherited class (GamingPhone)
+class GamingPhone(Smartphone):
+    def __init__(self, brand, model, battery=120, cooling_system=True):
+        # Call parent constructor
+        super().__init__(brand, model, battery)
+        self.cooling_system = cooling_system
+
+    # Polymorphism: override play_game
+    def play_game(self):
+        if self.battery > 10:
+            print(f"{self.model} is running a high-performance game smoothly!")
+            self.battery -= 15
+        else:
+            print(f"{self.model} battery too low to play games!")
+
+
+# Testing the classes
+phone1 = Smartphone("Samsung", "Galaxy S21")
+phone2 = GamingPhone("Asus", "ROG Phone 7")
+
+# Use methods
+phone1.install_app("WhatsApp")
+phone1.make_call("0700123456")
+phone1.play_game()
+phone1.check_battery()
+
+print("-----")
+
+phone2.install_app("PUBG Mobile")
+phone2.play_game()
+phone2.check_battery()
